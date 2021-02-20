@@ -1,0 +1,57 @@
+<body bgcolor=ivory scroll=no>
+<LINK HREF="switch.xsl" rel="stylesheet">
+<script>
+document.oncontextmenu=new Function("return false");
+document.onselectstart=new Function("return false");
+var persistmenu="yes" 
+var persisttype="sitewide"
+if (document.getElementById){ 
+document.write('<style type="text/css">\n')
+document.write('.submenu{display: none;}\n')
+document.write('</style>\n')
+}
+function getLoad() {
+var anc=document.getElementsByTagName("A");
+ for(an=0;an<anc.length;an++) {
+ anc[an].onmouseover=function() {status=this.innerHTML;return true;}
+ anc[an].onmouseout=function() {status="Done";return true;}
+ anc[an].onfocus=function() {status=this.innerHTML;this.blur();return true;}
+ anc[an].oncontextmenu=function() {
+                             var cfm=confirm("Would u like to open this link in New Window");
+                             if(cfm) open(this.href);
+                             else return;
+                                  }
+}
+}
+function SwitchMenu(obj){
+	if(document.getElementById){
+	var el = document.getElementById(obj);
+	var ar = document.getElementById("masterdiv").getElementsByTagName("span"); 		if(el.style.display != "block"){ 
+			for (var i=0; i<ar.length; i++){
+				if (ar[i].className=="submenu") 
+				ar[i].style.display = "none";
+			}
+			el.style.display = "block";
+		}else{
+			el.style.display = "none";
+		}
+	}
+}
+function getReports(url) {
+var mw=screen.availWidth-50;
+var mh=screen.availHeight-50;
+open(url,"reportss","scrollbars,width="+mw+",height="+mh+",left=20,top=20,maximize=yes");
+}
+
+</script>
+	
+<div id="masterdiv">
+<div class="menutitle" onclick="SwitchMenu('sub3')">Reports </div>
+	<span class="submenu" id="sub3">
+		&nbsp;&nbsp;&nbsp;&nbsp;<font face=webdings color=lightslategray>4</font> <a href="javascript:getReports('report?table=job_requ')">JOB REQU REPORT</a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<font face=webdings color=lightslategray>4</font> <a href="javascript:getReports('report?table=feed_back')">CLIENT FEEDBACK REPORT</a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<font face=webdings color=lightslategray>4</font> <a href="javascript:getReports('report?table= seek_add')"> SEEKADD REPORT</a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<font face=webdings color=lightslategray>4</font> <a href="javascript:getReports('report?table=ONLINE_TESTLOGIN')">ONLINE TEST LOGIN REPORT</a><BR>
+		&nbsp;&nbsp;&nbsp;&nbsp;<font face=webdings color=lightslategray>4</font> <a href="javascript:getReports('report?table=TEST_QUERIES')">TEST QUERIES REPORT</a><br>
+	</span>
+</div><script>getLoad()</script>
